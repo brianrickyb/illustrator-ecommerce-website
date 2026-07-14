@@ -79,6 +79,43 @@ database and wires the `DB_*` env vars between them automatically.
 3. Set the `APP_KEY` env var on the web service (same as above).
 4. Deploy, then run `php artisan db:seed --force` once via the Render shell.
 
+### Vercel (experimental)
+
+Vercel is built for static sites and serverless functions, not
+long-running PHP apps, so this path needs more manual wiring and has
+real limitations — see the notes below. It uses the community
+[`vercel-php`](https://github.com/vercel-community/php) runtime via
+`api/index.php` (a thin wrapper around `public/index.php`) and
+`vercel.json` (routes static files directly, everything else to that
+function).
+
+1. Push this repo to GitHub.
+2. Create a free Postgres database at [neon.tech](https://neon.tech)
+   (no card required) and copy its connection details.
+3. On [vercel.com](https://vercel.com), "Add New" → "Project" → import
+   this repo. Vercel should auto-detect `vercel.json`.
+4. Add these environment variables on the project:
+   - `APP_KEY` — generate locally with `php artisan key:generate --show`
+   - `APP_ENV=production`, `APP_DEBUG=false`
+   - `APP_URL=https://<your-vercel-domain>`
+   - `DB_CONNECTION=pgsql`, plus `DB_HOST`, `DB_PORT`, `DB_DATABASE`,
+     `DB_USERNAME`, `DB_PASSWORD` from Neon
+   - `SESSION_DRIVER=cookie` (no writable disk for file sessions)
+   - `CACHE_DRIVER=array` (resets every cold start, but avoids disk writes)
+   - `LOG_CHANNEL=stderr` (writes to Vercel's function logs instead of a file)
+   - `VIEW_COMPILED_PATH=/tmp` (the only writable path in a serverless function)
+   - `QUEUE_CONNECTION=sync`, `FILESYSTEM_DISK=public`
+5. Deploy, then run migrations once from your own machine against the
+   Neon database: set your local `.env` `DB_*` to the Neon credentials
+   and run `php artisan migrate --seed --force`.
+
+**Limitations to expect:** admin-uploaded product photos won't persist
+(serverless functions have no writable disk beyond `/tmp`, which is
+wiped per invocation) — the seeded demo photos work because they're
+committed to git and served as static files. Cold starts add latency
+to the first request after idle. If something 500s, check the
+function logs in the Vercel dashboard first.
+
 ### Notes
 
 - Product photos uploaded through the admin panel are written to

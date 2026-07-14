@@ -1,0 +1,52 @@
+{
+  "resources/css/Hero-Clean-images.css": {
+    "file": "assets/Hero-Clean-images-40067fd6.css",
+    "isEntry": true,
+    "src": "resources/css/Hero-Clean-images.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-4d4d94ed.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/css/bootstrap.min.css": {
+    "file": "assets/bootstrap.min-29354d21.css",
+    "isEntry": true,
+    "src": "resources/css/bootstrap.min.css"
+  },
+  "resources/css/home.css": {
+    "file": "assets/home-8ec16bdb.css",
+    "isEntry": true,
+    "src": "resources/css/home.css"
+  },
+  "resources/css/loginregister.css": {
+    "file": "assets/loginregister-ba0f00c3.css",
+    "isEntry": true,
+    "src": "resources/css/loginregister.css"
+  },
+  "resources/css/style.css": {
+    "file": "assets/style-c1ce2419.css",
+    "isEntry": true,
+    "src": "resources/css/style.css"
+  },
+  "resources/css/thankyou.css": {
+    "file": "assets/thankyou-4fda71cd.css",
+    "isEntry": true,
+    "src": "resources/css/thankyou.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-21ee9d6e.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/bold-and-bright.js": {
+    "file": "assets/bold-and-bright-9200bf1f.js",
+    "isEntry": true,
+    "src": "resources/js/bold-and-bright.js"
+  },
+  "resources/js/bootstrap.min.js": {
+    "file": "assets/bootstrap.min-9b76dfa4.js",
+    "isEntry": true,
+    "src": "resources/js/bootstrap.min.js"
+  }
+}
