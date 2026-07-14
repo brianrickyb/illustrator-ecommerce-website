@@ -1,0 +1,58 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    /* text-align: center; */
+    background-color: #fdf7ea;
+
+    /* background-color: #f3c4cb; */
+}
+nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    /* position: fixed; */
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Ensure the navbar is above other content */
+}
+
+.piccontainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    display: flex;
+}
+
+#pics {
+    width: 150px;
+    height: 100px;
+}
+
+.navbar2 a {
+    color: #d9898c;
+    padding: 20px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar2 a:hover {
+    color: #f9c7cf;
+}
+#cart-button,
+#profile-button {
+    background-color: transparent;
+    font-size: 15px;
+    margin: 10px;
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 14px;
+    border-color: #d9898c;
+    color: #d9898c;
+}
+
+.button-container {
+    /* position: fixed; */
+    display: flex;
+    justify-content: space-between;
+    top: 10px;
+    right: 50px;
+}

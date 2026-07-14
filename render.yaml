@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: irene-paramitha-shop
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_NAME
+        value: "Irene Paramitha"
+      - key: LOG_CHANNEL
+        value: stack
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: irene-paramitha-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: irene-paramitha-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: irene-paramitha-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: irene-paramitha-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: irene-paramitha-db
+          property: password
+      - key: APP_KEY
+        sync: false
+
+databases:
+  - name: irene-paramitha-db
+    plan: free
