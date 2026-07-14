@@ -12,8 +12,9 @@
     @vite('resources/js/bootstrap.min.js')
     @vite('resources/js/bold-and-bright.js')
     @vite('resources/css/home.css')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 
@@ -95,51 +96,49 @@
             </div>
         </nav>
     </div>
-    @auth
-        <div class="py-4 container">
-            <div class="container-gallery">
-                @foreach ($products as $key => $product)
-                    @if ($key % 3 == 0)
-                        <div class="big">
-                            <a href="/home/homeproductdetail/{{ $product->id }}">
-                                <img class="img-fluid rounded" src="{{ asset($photos[$key]) }}"
-                                    alt="bssblocks image placeholder" height="100%" width="100%" />
-                            </a>
-                        </div>
-                    @else
-                        <div class="{{ ($key + 1) % 3 == 0 ? 'horizontal' : 'vertical' }}">
-                            <a href="/home/homeproductdetail/{{ $product->id }}">
-                                <img class="img-fluid rounded" src="{{ asset($photos[$key]) }}"
-                                    alt="bssblocks image placeholder" height="100%" width="100%" />
-                            </a>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
+
+    @php
+        $detailBase = auth()->check() ? '/home/homeproductdetail' : '/homeproductdetail';
+        $categories = $products->pluck('category')->filter()->unique()->sort()->values();
+    @endphp
+
+    <div class="showcase-intro">
+        <p class="showcase-eyebrow">Portfolio</p>
+        <h1 class="showcase-title">Selected Works</h1>
+        <p class="showcase-subtitle">A collection of illustrations, charms, and prints — hover a piece to see what
+            it's about.</p>
+    </div>
+
+    @if ($categories->isNotEmpty())
+        <div class="gallery-filters">
+            <button type="button" class="gallery-filter-btn active" data-filter="all">All</button>
+            @foreach ($categories as $category)
+                <button type="button" class="gallery-filter-btn" data-filter="{{ $category }}">
+                    {{ ucfirst($category) }}
+                </button>
+            @endforeach
         </div>
-    @else
-        <div class="py-4 container">
-            <div class="container-gallery">
-                @foreach ($products as $key => $product)
-                    @if ($key % 3 == 0)
-                        <div class="big">
-                            <a href="/homeproductdetail/{{ $product->id }}">
-                                <img class="img-fluid rounded" src="{{ asset($photos[$key]) }}"
-                                    alt="bssblocks image placeholder" height="100%" width="100%" />
-                            </a>
+    @endif
+
+    <div class="py-4 container">
+        <div class="container-gallery">
+            @foreach ($products as $key => $product)
+                <div class="gallery-item {{ $key % 3 == 0 ? 'big' : (($key + 1) % 3 == 0 ? 'horizontal' : 'vertical') }}"
+                    data-category="{{ $product->category }}">
+                    <a href="{{ $detailBase }}/{{ $product->id }}" class="gallery-item-link">
+                        <img class="img-fluid rounded" src="{{ asset($photos[$key]) }}"
+                            alt="{{ $product->productName }}" height="100%" width="100%" />
+                        <div class="gallery-overlay">
+                            <span class="gallery-overlay-category">{{ ucfirst($product->category) }}</span>
+                            <h3 class="gallery-overlay-title">{{ $product->productName }}</h3>
+                            <p class="gallery-overlay-desc">{{ Illuminate\Support\Str::limit($product->description, 90) }}</p>
                         </div>
-                    @else
-                        <div class="{{ ($key + 1) % 3 == 0 ? 'horizontal' : 'vertical' }}">
-                            <a href="/homeproductdetail/{{ $product->id }}">
-                                <img class="img-fluid rounded" src="{{ asset($photos[$key]) }}"
-                                    alt="bssblocks image placeholder" height="100%" width="100%" />
-                            </a>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
-    @endauth
+    </div>
+
     <script>
         function redirectToLogin() {
             window.location.href = '{{ route('login') }}';
@@ -156,6 +155,19 @@
         function redirectToProfile() {
             window.location.href = '/home/profileuser';
         }
+
+        document.querySelectorAll('.gallery-filter-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.gallery-filter-btn').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                var filter = btn.dataset.filter;
+                document.querySelectorAll('.gallery-item').forEach(function (item) {
+                    item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+                });
+            });
+        });
     </script>
 </body>
 
