@@ -2,12 +2,14 @@
   "builds": [
     { "src": "public/**", "use": "@vercel/static" },
     { "src": "storage/app/public/**", "use": "@vercel/static" },
-    { "src": "api/index.php", "use": "vercel-php@0.7.4" }
+    { "src": "api/index.php", "use": "vercel-php@0.7.4" },
+    { "src": "api/debug.php", "use": "vercel-php@0.7.4" }
   ],
   "routes": [
     { "src": "/storage/(.*)", "dest": "/storage/app/public/$1" },
     { "src": "/(build|images)/(.*)", "dest": "/public/$1/$2" },
     { "src": "/(favicon\\.ico|robots\\.txt)", "dest": "/public/$1" },
+    { "src": "/__debug", "dest": "/api/debug.php" },
     { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
