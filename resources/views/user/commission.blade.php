@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Commission Page</title>
+    <title>Commissions — {{ config('app.name') }}</title>
+    <meta name="description"
+        content="Open commissions for illustration work. See pricing, portfolio samples, and how to order.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Commissions — {{ config('app.name') }}">
+    <meta property="og:description" content="Open commissions for illustration work — pricing and portfolio samples.">
     @vite('resources/css/style.css')
     @vite('resources/css/Hero-Clean-images.css')
     @vite('resources/css/bootstrap.min.css')
@@ -22,7 +27,7 @@
             <div class="container">
                 @auth
                     <a class="navbar-brand" href="/home" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -59,7 +64,7 @@
                     </div>
                 @else
                     <a class="navbar-brand" href="/" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -114,16 +119,16 @@
         <br>
         <div class="commission-card text-center">
             <div class="card-body">
-                <img src="{{ URL::asset('images/slide1.jpg') }}" class="d-block w-100" alt="Slide 1"
-                    style="max-width: 100%; max-height: 100%;">
+                <img src="{{ URL::asset('images/slide1.jpg') }}" class="d-block w-100" alt="Commission price list — page 1"
+                    style="max-width: 100%; max-height: 100%;" loading="lazy" decoding="async">
             </div><br>
             <div class="card-body">
-                <img src="{{ URL::asset('images/slide2.jpg') }}" class="d-block w-100" alt="Slide 1"
-                    style="max-width: 100%; max-height: 100%;">
+                <img src="{{ URL::asset('images/slide2.jpg') }}" class="d-block w-100" alt="Commission price list — page 2"
+                    style="max-width: 100%; max-height: 100%;" loading="lazy" decoding="async">
             </div><br>
             <div class="card-body">
-                <img src="{{ URL::asset('images/slide3.jpg') }}" class="d-block w-100" alt="Slide 1"
-                    style="max-width: 100%; max-height: 100%;">
+                <img src="{{ URL::asset('images/slide3.jpg') }}" class="d-block w-100" alt="Commission price list — page 3"
+                    style="max-width: 100%; max-height: 100%;" loading="lazy" decoding="async">
             </div><br>
             <h5 class="card-title commission-header"><b>For More Detail On Vgen</b></h5>
             <!-- Bagian Chibi -->

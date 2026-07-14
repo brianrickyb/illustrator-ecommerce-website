@@ -5,7 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config('app.name') }} — Home</title>
+    <title>{{ config('app.name') }} — Illustration & Merch Portfolio</title>
+    <meta name="description"
+        content="Selected illustration work by Irene Paramitha — murals, prints, charms, and photocards. Browse the collection and shop originals.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ config('app.name') }} — Illustration & Merch Portfolio">
+    <meta property="og:description" content="Selected illustration work — murals, prints, charms, and photocards.">
+    <meta property="og:image" content="{{ URL::asset('images/logo-full.svg') }}">
+    <meta name="twitter:card" content="summary">
     @vite('resources/css/style.css')
     @vite('resources/css/Hero-Clean-images.css')
     @vite('resources/css/bootstrap.min.css')
@@ -24,7 +31,7 @@
             <div class="container">
                 @auth
                     <a class="navbar-brand" href="/home" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -61,7 +68,7 @@
                     </div>
                 @else
                     <a class="navbar-brand" href="/" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -127,7 +134,8 @@
                     data-category="{{ $product->category }}">
                     <a href="{{ $detailBase }}/{{ $product->id }}" class="gallery-item-link">
                         <img class="img-fluid rounded" src="{{ asset($photos[$key]) }}"
-                            alt="{{ $product->productName }}" height="100%" width="100%" />
+                            alt="{{ $product->productName }}" height="100%" width="100%"
+                            @if ($key > 2) loading="lazy" @endif decoding="async" />
                         <div class="gallery-overlay">
                             <span class="gallery-overlay-category">{{ ucfirst($product->category) }}</span>
                             <h3 class="gallery-overlay-title">{{ $product->productName }}</h3>

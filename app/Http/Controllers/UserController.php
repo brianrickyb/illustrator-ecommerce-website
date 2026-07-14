@@ -64,33 +64,16 @@ class UserController extends Controller
             $idUser = Auth::id();
             $idProduct = $request->buttonBeli;
             $product = Product::findOrFail($idProduct);
-            if (ShoppingCart::where('idUser', $idUser)->where('idProduct', $idProduct)->count() > 0) {
-                $shoppingCart = ShoppingCart::where('idUser', $idUser)->where('idProduct', $idProduct)->get();
-                foreach ($shoppingCart as $shoppingCart) {
-                    if (isset($request->qty)) {
-                        $quantity = $request->qty;
-                    } else {
-                        $quantity = 1;
-                    }
-                    $shoppingCart->qty = $shoppingCart->qty + $quantity;
-                    $shoppingCart->totalPrice = $product->price * $shoppingCart->qty;
-                }
-            } else {
-                if (isset($request->qty)) {
-                    $quantity = $request->qty;
-                } else {
-                    $quantity = 1;
-                }
+            $quantity = $request->qty ?? 1;
 
-                $totalPrice = $quantity * $product->price;
-
-                $shoppingCart = new ShoppingCart();
-                $shoppingCart->idUser     = $idUser;
-                $shoppingCart->idProduct  = $idProduct;
-                $shoppingCart->qty        = $quantity;
-                $shoppingCart->totalPrice = $totalPrice;
-            }
+            $shoppingCart = ShoppingCart::firstOrNew([
+                'idUser' => $idUser,
+                'idProduct' => $idProduct,
+            ]);
+            $shoppingCart->qty = ($shoppingCart->qty ?? 0) + $quantity;
+            $shoppingCart->totalPrice = $product->price * $shoppingCart->qty;
             $shoppingCart->save();
+
             return redirect('/home/shop');
         }
     }
@@ -102,16 +85,13 @@ class UserController extends Controller
             $productID = $request->btnProductID;
 
             $product = Product::findOrFail($productID);
+            $shoppingCart = ShoppingCart::where('idUser', $idUser)->where('idProduct', $productID)->first();
 
-
-            $shoppingCart = ShoppingCart::where('idUser', $idUser)->where("idProduct", $productID)->get();
-
-            foreach ($shoppingCart as $shoppingCart) {
-                $shoppingCart->qty = $shoppingCart->qty + 1;
+            if ($shoppingCart) {
+                $shoppingCart->qty += 1;
                 $shoppingCart->totalPrice += $product->price;
+                $shoppingCart->save();
             }
-
-            $shoppingCart->save();
         }
         return redirect('/home/shopping-cart');
     }
@@ -123,11 +103,11 @@ class UserController extends Controller
             $productID = $request->btnProductID;
 
             $product = Product::findOrFail($productID);
+            $shoppingCart = ShoppingCart::where('idUser', $idUser)->where('idProduct', $productID)->first();
 
-            $shoppingCart = ShoppingCart::where('idUser', $idUser)->where("idProduct", $productID)->get();
-            foreach ($shoppingCart as $shoppingCart) {
+            if ($shoppingCart) {
                 if ($shoppingCart->qty > 1) {
-                    $shoppingCart->qty = $shoppingCart->qty - 1;
+                    $shoppingCart->qty -= 1;
                     $shoppingCart->totalPrice -= $product->price;
                     $shoppingCart->save();
                 } else {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Show Product</title>
+    <meta name="robots" content="noindex, nofollow">
     @vite('resources/css/style.css')
     @vite('resources/css/Hero-Clean-images.css')
     @vite('resources/css/bootstrap.min.css')
@@ -23,7 +24,7 @@
             <div class="container">
                 @auth
                     <a class="navbar-brand" href="/home" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -62,7 +63,7 @@
                     <div id="carouselExampleIndicators" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{ asset($photos) }}" class="d-block w-100" alt="..."><br>
+                                <img src="{{ asset($photos) }}" class="d-block w-100" alt="{{ $product->productName }}"><br>
                             </div>
                         </div>
                     </div>
@@ -76,7 +77,7 @@
                 <div class="row">
                     @foreach ($photoPreviews as $preview)
                         <div class="col-md-2 col-sm-6">
-                            <img src="{{ asset($preview) }}" class="d-block w-100" alt="..."><br>
+                            <img src="{{ asset($preview) }}" class="d-block w-100" alt="{{ $product->productName }} preview" loading="lazy" decoding="async"><br>
                         </div>
                     @endforeach
                 </div>
@@ -84,7 +85,7 @@
                 <div class="row">
                     @foreach ($photoProgress as $progress)
                         <div class="col-md-2 col-sm-6">
-                            <img src="{{ asset($progress) }}" class="d-block w-100" alt="..."><br>
+                            <img src="{{ asset($progress) }}" class="d-block w-100" alt="{{ $product->productName }} progress" loading="lazy" decoding="async"><br>
                         </div>
                     @endforeach
                 </div>

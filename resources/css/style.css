@@ -106,7 +106,7 @@ footer.bg-primary-gradient {
 
 body {
     background-color: #fff7e8;
-    color: #f77789;
+    color: #bb3b4d;
     overflow-x: hidden;
 }
 
@@ -362,7 +362,7 @@ nav {
     position: relative;
 }
 .nav-wrapper-1 ul li a {
-    color: #f77789 !important;
+    color: #bb3b4d !important;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -382,14 +382,14 @@ nav {
         position: relative;
     }
     .nav-wrapper-1 ul li a {
-        color: #f77789 !important;
+        color: #bb3b4d !important;
         text-decoration: none;
         text-transform: uppercase;
     }
 }
 
 .qty-input {
-    color: #f77789;
+    color: #bb3b4d;
     background: #fff7e8;
     display: flex;
     align-items: center;
@@ -530,11 +530,11 @@ nav {
 
 .bs-icon.bs-icon-primary {
     color: var(--bs-white);
-    background: #f77789 !important;
+    background: #bb3b4d !important;
 }
 
 .btn-primary {
-    background-color: #f77789 !important;
+    background-color: #bb3b4d !important;
     border-color: #ffbec8 !important;
 }
 

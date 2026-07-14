@@ -5,7 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Product Detail</title>
+    <title>{{ $product->productName }} — {{ config('app.name') }}</title>
+    <meta name="description" content="{{ Illuminate\Support\Str::limit($product->description, 150) }}">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ $product->productName }}">
+    <meta property="og:description" content="{{ Illuminate\Support\Str::limit($product->description, 150) }}">
+    @if (!empty($photoPreview))
+        <meta property="og:image" content="{{ asset($photoPreview[0]) }}">
+    @endif
     @vite('resources/css/style.css')
     @vite('resources/css/Hero-Clean-images.css')
     @vite('resources/css/bootstrap.min.css')
@@ -22,7 +29,7 @@
             <div class="container">
                 @auth
                     <a class="navbar-brand" href="/home" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -59,7 +66,7 @@
                     </div>
                 @else
                     <a class="navbar-brand" href="/" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -108,9 +115,11 @@
                                 aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
-                            @foreach ($photoPreview as $preview)
-                                <div class="carousel-item active">
-                                    <img src="{{ asset($preview) }}" class="d-block w-100"><br>
+                            @foreach ($photoPreview as $key => $preview)
+                                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                    <img src="{{ asset($preview) }}" class="d-block w-100"
+                                        alt="{{ $product->productName }}"
+                                        @if ($key > 0) loading="lazy" decoding="async" @endif><br>
                                 </div>
                             @endforeach
                         </div>

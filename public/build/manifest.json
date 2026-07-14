@@ -5,7 +5,7 @@
     "src": "resources/css/Hero-Clean-images.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app-4d4d94ed.css",
+    "file": "assets/app-baf7a090.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -15,7 +15,7 @@
     "src": "resources/css/bootstrap.min.css"
   },
   "resources/css/home.css": {
-    "file": "assets/home-3df7d017.css",
+    "file": "assets/home-cbbfe138.css",
     "isEntry": true,
     "src": "resources/css/home.css"
   },
@@ -25,7 +25,7 @@
     "src": "resources/css/loginregister.css"
   },
   "resources/css/style.css": {
-    "file": "assets/style-c1ce2419.css",
+    "file": "assets/style-3125e64f.css",
     "isEntry": true,
     "src": "resources/css/style.css"
   },

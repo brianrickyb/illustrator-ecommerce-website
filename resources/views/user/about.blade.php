@@ -5,7 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>About</title>
+    <title>About — {{ config('app.name') }}</title>
+    <meta name="description"
+        content="Meet Irene Paramitha, a self-taught kidlit illustrator and merch artist bringing warm, sweet illustration to life since 2020.">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="About — {{ config('app.name') }}">
+    <meta property="og:description" content="Meet Irene Paramitha, self-taught kidlit illustrator and merch artist.">
+    <meta property="og:image" content="{{ URL::asset('images/about.jpg') }}">
     @vite('resources/css/style.css')
     @vite('resources/css/Hero-Clean-images.css')
     @vite('resources/css/bootstrap.min.css')
@@ -22,7 +28,7 @@
             <div class="container">
                 @auth
                     <a class="navbar-brand" href="/home" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -59,7 +65,7 @@
                     </div>
                 @else
                     <a class="navbar-brand" href="/" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -99,7 +105,7 @@
             <div class="row gy-4 gy-md-0">
                 <div class="col-md-4 col-sm-6">
                     <img class="image--cover img-fluid fit-cover"
-                        src="{{ URL::asset('images/about.jpg') }}">
+                        src="{{ URL::asset('images/about.jpg') }}" alt="Irene Paramitha" decoding="async">
                 </div>
                 <div class="col-md-8 col-sm-6 d-md-flex align-items-md-center">
                     <div style="max-width: 500px; text-align:left; margin-left: 30px">

@@ -151,13 +151,6 @@ class AdminController extends Controller
             'photoProgress.*' => 'image|mimes:jpg,jpeg,png',
         ]);
 
-        $product = Product::where('id', $request->id)
-            ->where('id', '!=', $id)
-            ->get();
-        if ($product->count() > 0) {
-            return redirect()->back()->withInput()->withErrors(['id' => 'The id is already taken.']);
-        }
-
         //check photo
         $product = Product::findOrFail($id);
         if ($request->hasFile('photo')) {
@@ -215,7 +208,7 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $product->delete();
         return redirect('/home');
     }

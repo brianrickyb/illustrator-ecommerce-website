@@ -6,7 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shop Page</title>
+    <title>Shop — {{ config('app.name') }}</title>
+    <meta name="description"
+        content="Shop original prints, charms, photocards, and artbooks by Irene Paramitha.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shop — {{ config('app.name') }}">
+    <meta property="og:description" content="Original prints, charms, photocards, and artbooks.">
     @vite('resources/css/style.css')
     @vite('resources/css/Hero-Clean-images.css')
     @vite('resources/css/bootstrap.min.css')
@@ -37,7 +42,7 @@
             <div class="container">
                 @auth
                     <a class="navbar-brand" href="/home" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -74,7 +79,7 @@
                     </div>
                 @else
                     <a class="navbar-brand" href="/" style="width: 200px">
-                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="" class="logo-nav" />
+                        <img src="{{ URL::asset('images/logo-icon.svg') }}" alt="{{ config('app.name') }}" class="logo-nav" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -114,15 +119,17 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{{ URL::asset('images/banner1.jpg') }}" class="d-block w-100"
-                        alt="Slide 1" style="max-width: 100%; max-height: 100%;">
+                        alt="Shop banner 1" style="max-width: 100%; max-height: 100%;" decoding="async">
                 </div>
                 <div class="carousel-item">
                     <img src="{{ URL::asset('images/banner2.jpg') }}"
-                        class="d-block w-100" alt="Slide 2" style="max-width: 100%; max-height: 100%;">
+                        class="d-block w-100" alt="Shop banner 2" style="max-width: 100%; max-height: 100%;"
+                        loading="lazy" decoding="async">
                 </div>
                 <div class="carousel-item">
                     <img src="{{ URL::asset('images/banner3.jpg') }}"
-                        class="d-block w-100" alt="Slide 2" style="max-width: 100%; max-height: 100%;">
+                        class="d-block w-100" alt="Shop banner 3" style="max-width: 100%; max-height: 100%;"
+                        loading="lazy" decoding="async">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
@@ -186,7 +193,8 @@
                                         <section class="panel">
                                             <div class="pro-img-box text-center mb-2">
                                                 <img src="{{ asset($photos[$key]) }}" class="card-img-top"
-                                                    alt="Product Image" style="width: 100%; height: 200px;">
+                                                    alt="{{ $product->productName }}" style="width: 100%; height: 200px;"
+                                                    loading="lazy" decoding="async">
                                             </div>
                                             <div class="panel-body">
                                                 <div class="d-flex flex-column align-items-left">
